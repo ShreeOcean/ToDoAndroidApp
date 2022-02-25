@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/ChetuTrainingTaskAndroid/ToDoApp/app/src/main/res/drawable/btn_round_corner.xml" value="0.167" />
+        <entry key="..\:/ChetuTrainingTaskAndroid/ToDoApp/app/src/main/res/drawable/textview_bg_round_corner.xml" value="0.167" />
+        <entry key="..\:/ChetuTrainingTaskAndroid/ToDoApp/app/src/main/res/drawable/todo_msg_bg_round_corner.xml" value="0.167" />
+        <entry key="..\:/ChetuTrainingTaskAndroid/ToDoApp/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/ChetuTrainingTaskAndroid/ToDoApp/app/src/main/res/layout/custom_dialog_create_todolist.xml" value="0.1578125" />
+        <entry key="..\:/ChetuTrainingTaskAndroid/ToDoApp/app/src/main/res/layout/custom_todo_list.xml" value="0.1578125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
