@@ -7,7 +7,7 @@ public class TodoListModel {
     private String todoMsg;
     private String datetime;
 
-    public TodoListModel(String rowId, String todoTittle, String todoMsg, String datetime) {
+    public TodoListModel() {
         this.rowId = rowId;
         this.todoTittle = todoTittle;
         this.todoMsg = todoMsg;
