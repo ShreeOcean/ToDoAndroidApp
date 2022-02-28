@@ -12,16 +12,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#6D88A6FF"
+        android:padding="5dp">
 
-        <TextView
-            android:id="@+id/tv_todoDateTime"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textAlignment="viewEnd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_todoMsg" />
 
         <TextView
             android:id="@+id/tv_todoTitlle"
@@ -29,7 +23,9 @@
             android:layout_height="50dp"
             android:background="@drawable/todo_tittle_bg_round_corner"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="25sp"
+            android:padding="10dp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,12 +36,25 @@
             android:layout_height="wrap_content"
             android:background="@drawable/todo_msg_bg_round_corner"
             android:textAlignment="center"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:layout_margin="5dp"
+            android:padding="10dp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_todoTitlle" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_todoDateTime"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textAlignment="viewEnd"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_todoMsg" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
