@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import nic.ocean.todosqliteapp.utility.Utility;
 
 public class DatabaseSQLite {

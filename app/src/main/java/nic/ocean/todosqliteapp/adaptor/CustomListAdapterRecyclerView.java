@@ -16,7 +16,7 @@ import nic.ocean.todosqliteapp.databinding.CustomTodoListBinding;
 import nic.ocean.todosqliteapp.interfaces.OnItemClickListener;
 import nic.ocean.todosqliteapp.model.TodoListModel;
 
-public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomListAdapterRecyclerView.ViewHolder> {
+public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomListAdapterRecyclerView.ViewHolder>{
 
     ///CustomDialogCreateTodolistBinding customDialogCreateTodolistBinding;
 
@@ -46,7 +46,7 @@ public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomLi
 //                .inflate(R.layout.custom_todo_list, parent, false);
 
         CustomTodoListBinding customTodoListBinding = CustomTodoListBinding.inflate(LayoutInflater.from(context), parent, false);
-        return new ViewHolder(customTodoListBinding);
+            return new ViewHolder(customTodoListBinding);
 
         //return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_todo_list, parent, false));
     }
@@ -62,6 +62,8 @@ public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomLi
         holder.customTodoListBinding.tvTodoMsg.setText(data.getTodoMsg());
         holder.customTodoListBinding.tvTodoDateTime.setText(data.getDatetime());
 
+        listner.onItemClick(todoDataModelList, position);
+
 
     }
 
@@ -76,14 +78,13 @@ public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomLi
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
+    public class ViewHolder extends RecyclerView.ViewHolder{
         CustomTodoListBinding customTodoListBinding;
-
         public ViewHolder(@NonNull CustomTodoListBinding itemView) {
             super(itemView.getRoot());
             customTodoListBinding = itemView;
             // Define click listener for the ViewHolder's View
         }
+
     }
 }

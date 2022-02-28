@@ -1,9 +1,11 @@
 package nic.ocean.todosqliteapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +16,12 @@ import android.view.WindowManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import nic.ocean.todosqliteapp.adaptor.CustomListAdapterRecyclerView;
 import nic.ocean.todosqliteapp.databinding.ActivityMainBinding;
@@ -27,19 +31,24 @@ import nic.ocean.todosqliteapp.interfaces.OnItemClickListener;
 import nic.ocean.todosqliteapp.model.TodoListModel;
 import nic.ocean.todosqliteapp.utility.Utility;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener{
 
     ActivityMainBinding mainBinding;
     CustomDialogCreateTodolistBinding customDialogCreateTodolistBinding;
     String formattedDate;
-    private DatabaseSQLite dbSqLite;
+    public DatabaseSQLite dbSqLite;
     Cursor cursor;
+    String currentDateandTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
+
+        dbSqLite = new DatabaseSQLite(this);
+        dbSqLite.openDatabase();
+        loadDataInListView();
 
         StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mainBinding.recyclerView.setLayoutManager(linearLayoutManager);
@@ -56,28 +65,51 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
             Window window = dialog.getWindow();
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-            customDialogCreateTodolistBinding.tvTodoDateTime.setText(formattedDate);
+
+            customDialogCreateTodolistBinding.tvTodoDateTime.setText(currentDateandTime);
+
             customDialogCreateTodolistBinding.btnSaveToDoList.setOnClickListener(view1 -> {
                 dbSqLite.insertData(MainActivity.this, customDialogCreateTodolistBinding.etTodoTitlle.getText().toString(),
-                                    customDialogCreateTodolistBinding.etTodoMsg.getText().toString(),
-                                    customDialogCreateTodolistBinding.tvTodoDateTime.getText().toString());
+
+                        customDialogCreateTodolistBinding.etTodoMsg.getText().toString(),
+                        customDialogCreateTodolistBinding.tvTodoDateTime.getText().toString());
+
+                dialog.dismiss();
+            });
+            customDialogCreateTodolistBinding.btnCloseDialog.setOnClickListener(view1 -> {
                 dialog.dismiss();
             });
 
         });
-
-        dbSqLite = new DatabaseSQLite(this);
-        dbSqLite.openDatabase();
-
-        CustomListAdapterRecyclerView adapter = new CustomListAdapterRecyclerView(this, getAllToDOList(), new OnItemClickListener() {
-            @Override
-            public void onItemClick(List<TodoListModel> todoListModelList, int position) {
-                Utility.showLongToast(MainActivity.this, todoListModelList.get(position).getTodoTittle() + " "  + todoListModelList.get(position).getTodoMsg() +" "+ todoListModelList.get(position).getDatetime());
-            }
-        });
-        mainBinding.recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
+
+        private void loadDataInListView() {
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            mainBinding.recyclerView.setLayoutManager(linearLayoutManager);
+            // MyRecyclerView Class
+            CustomListAdapterRecyclerView adapter = new CustomListAdapterRecyclerView(this, getAllToDOList(), new OnItemClickListener() {
+                @Override
+                public void onItemClick(List<TodoListModel> todoListModelList, int position) {
+                    //on list item click code to write
+//                 
+                }
+            });
+
+            mainBinding.recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+        }
+
+//        CustomListAdapterRecyclerView adapter = new CustomListAdapterRecyclerView(this, getAllToDOList(), new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(List<TodoListModel> todoListModelList, int position) {
+//              //  Utility.showLongToast(MainActivity.this, todoListModelList.get(position).getTodoTittle() + " "  + todoListModelList.get(position).getTodoMsg() +" "+ todoListModelList.get(position).getDatetime());
+//            }
+//        });
+//        mainBinding.recyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//    }
 
     private List<TodoListModel> getAllToDOList() {
 
@@ -92,8 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 todoListModel.setTodoTittle(cursor.getString(1));
                 todoListModel.setTodoMsg(cursor.getString(2));
                 todoListModel.setDatetime(cursor.getString(3));
-
+                list.add(todoListModel);
             }while (cursor.moveToNext());
+
         }
         return list;
     }
@@ -105,7 +138,16 @@ public class MainActivity extends AppCompatActivity {
 
 //        customDialogCreateTodolistBinding.tvTodoDateTime.setText(formattedDate);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd__HH:mm:ss", Locale.getDefault());
+        currentDateandTime = sdf.format(new Date());
         Log.d("TAG_currentTime", "setCurrentDateTime: " + currentTime.toString());
         Log.d("TAG_formattedDate", "setCurrentDateTime: " + formattedDate);
+        Log.d("TAG_currentDateandTime", "setCurrentDateTime_____SimpleDateFormat: " + currentDateandTime);
+
+    }
+
+    @Override
+    public void onItemClick(List<TodoListModel> todoListModelList, int position) {
+
     }
 }
