@@ -1,9 +1,17 @@
 package nic.ocean.todosqliteapp.adaptor;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import nic.ocean.todosqliteapp.R;
+import nic.ocean.todosqliteapp.UpdateDeleteTODOListActivity;
 import nic.ocean.todosqliteapp.databinding.CustomDialogCreateTodolistBinding;
 import nic.ocean.todosqliteapp.databinding.CustomTodoListBinding;
 import nic.ocean.todosqliteapp.interfaces.OnItemClickListener;
@@ -18,8 +27,7 @@ import nic.ocean.todosqliteapp.model.TodoListModel;
 
 public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomListAdapterRecyclerView.ViewHolder>{
 
-    ///CustomDialogCreateTodolistBinding customDialogCreateTodolistBinding;
-
+    CustomDialogCreateTodolistBinding customDialogCreateTodolistBinding;
 //    private String[] localDataSet;
     private Context context;
     private List<TodoListModel> todoDataModelList;
@@ -36,34 +44,41 @@ public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomLi
         this.listner = listner;
     }
 
-    //predefine method where create new views (invoked by the layout manager)
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Create a new view, which defines the UI of the list item
-        //LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-//        View view = LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.custom_todo_list, parent, false);
 
         CustomTodoListBinding customTodoListBinding = CustomTodoListBinding.inflate(LayoutInflater.from(context), parent, false);
             return new ViewHolder(customTodoListBinding);
-
-        //return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_todo_list, parent, false));
     }
 
-    //predefine method where it replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        //holder.getTextView().setText(localDataSet[position]);
+
         TodoListModel data =  todoDataModelList.get(position);
         holder.customTodoListBinding.tvTodoTitlle.setText(data.getTodoTittle());
         holder.customTodoListBinding.tvTodoMsg.setText(data.getTodoMsg());
         holder.customTodoListBinding.tvTodoDateTime.setText(data.getDatetime());
 
         listner.onItemClick(todoDataModelList, position);
+        holder.itemView.setOnClickListener(view -> {
+            //Toast.makeText(context, "from onBindViewHolder() -->" + todoDataModelList.get(position), Toast.LENGTH_SHORT).show();
 
+//            final Dialog dialog = new Dialog(context);
+//            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//            dialog.setContentView(R.layout.custom_dialog_create_todolist);
+//            dialog.show();
+//            Window window = dialog.getWindow();
+//            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+            Intent intent = new Intent(context, UpdateDeleteTODOListActivity.class);
+            intent.putExtra("todo_tittle", data.getTodoTittle());
+            intent.putExtra("todo_body", data.getTodoMsg());
+            intent.putExtra("todo_date_time", data.getDatetime());
+            intent.putExtra("todo_item_row_id", data.getRowId());
+            context.startActivity(intent);
+
+        });
 
     }
 
@@ -73,7 +88,6 @@ public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomLi
 
         return todoDataModelList.size();
     }
-
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
@@ -84,6 +98,9 @@ public class CustomListAdapterRecyclerView extends RecyclerView.Adapter<CustomLi
             super(itemView.getRoot());
             customTodoListBinding = itemView;
             // Define click listener for the ViewHolder's View
+
+
+
         }
 
     }

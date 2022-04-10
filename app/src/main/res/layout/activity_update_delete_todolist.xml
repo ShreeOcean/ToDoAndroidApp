@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    tools:context=".UpdateDeleteTODOListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,20 +12,13 @@
         android:layout_margin="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btnCloseDialog"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:clickable="true"
-            android:outlineSpotShadowColor="@color/black"
-            android:background="@drawable/ic_baseline_cancel_presentation_24"
-            android:layout_gravity="right"/>
 
         <EditText
-            android:id="@+id/et_todoTitlle"
+            android:id="@+id/et_todoTitlle_up_del"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/todo_tittle_bg_round_corner"
@@ -36,20 +29,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/et_todoMsg"
+            android:id="@+id/et_todoMsg_up_del"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/todo_msg_bg_round_corner"
+            android:padding="5dp"
             android:textAlignment="center"
             android:textSize="15sp"
-            android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_todoTitlle" />
 
         <TextView
-            android:id="@+id/tv_todoDateTime"
+            android:id="@+id/tv_todoDateTime_up_del"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textAlignment="textEnd"
@@ -58,52 +51,57 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_todoMsg" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:weightSum="3">
+
             <Button
-                android:id="@+id/btnUpdateToDoList"
+                android:id="@+id/btnUpdateToDoList_up_del"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="Update"
-                android:visibility="invisible"
-                android:background="@drawable/btn_round_corner"
-                android:textColor="@color/black"
-                android:textAllCaps="true"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:background="@drawable/btn_round_corner"
+                android:text="Update"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
             <Button
                 android:id="@+id/btnSaveToDoList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="SAVE"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/btn_round_corner"
-                android:textColor="@color/black"
+                android:text="SAVE"
+                android:textAlignment="center"
                 android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_gravity="center"/>
+                android:visibility="invisible" />
+
             <Button
-                android:id="@+id/btnDeleteToDoList"
+                android:id="@+id/btnDeleteToDoList_up_del"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="DELETE"
-                android:visibility="invisible"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/btn_round_corner"
-                android:textColor="@color/black"
+                android:text="DELETE"
+                android:textAlignment="center"
                 android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_gravity="center"/>
+                android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
